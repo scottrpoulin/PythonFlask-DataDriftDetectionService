@@ -1,0 +1,49 @@
+---
+- database_config:
+    database_type: postgres
+    username: 'super_admin'
+    pwd: 'SomeSecretPassword'
+    host: 'postgres_test'
+    port: 5432
+    database: 'postgres'
+    tables:
+      - table_name: 'soup_shop'
+        date_column: 'date'
+        target_column: 'price'
+        numerical_columns:
+            - 'temperature'
+        categorical_columns:
+            - 'flavor'
+      - table_name: 'weather'
+        date_column: 'date'
+        target_column: 'precipitation'
+        numerical_columns:
+            - 'temperature'
+        categorical_columns:
+            - 'season'
+- drift_config:
+#    sample_size: 1000 Use to pull subsample of data if data is too large
+    reports: # DataQualityPreset, DataDriftPreset, TargetDriftPreset, RegressionPerformancePreset, ClassificationPerformancePreset
+        - report_type: 'DataDriftPreset' # parameters: columns, stattest, cat_stattest, num_stattest, per_column_stattest, stattest_threshold, cat_stattest_threshold, num_stattest_threshold, per_column_stattest_threshold, drift_share
+          parameters:
+            drift_share: 0.75
+#        - report_type: 'DataQualityPreset' # parameters: columns - Can not be used for multiple table configurations
+#          parameters:
+#            columns: []
+#        - report_type: 'TargetDriftPreset' # parameters: columns, stattest, cat_stattest, num_stattest, per_column_stattest, stattest_threshold, cat_stattest_threshold, num_stattest_threshold, per_column_stattest_threshold
+#          parameters:
+#            columns: []
+#        - report_type: 'RegressionPerformancePreset' # parameters: columns
+#          parameters:
+#            columns: []
+#        - report_type: 'ClassificationPerformancePreset' # parameters: columns, probas_threshold, k
+#          parameters:
+#            columns: []
+#            probas_threshold: 0.5
+#            k: 5
+
+
+
+
+
+

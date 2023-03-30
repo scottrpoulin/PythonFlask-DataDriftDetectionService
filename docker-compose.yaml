@@ -1,0 +1,22 @@
+version: '3.5'
+
+services:
+  app:
+    container_name: datadriftservice
+    image: datadriftdetectionservice:1.0.3
+    ports:
+      - "5001:5001"
+  postgres:
+    container_name: postgres_test
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: super_admin
+      POSTGRES_PASSWORD: SomeSecretPassword
+      PGDATA: /data/postgres
+    volumes:
+      - postgres-db:/data/postgres
+    ports:
+      - "5432:5432"
+volumes:
+  postgres-db:
+    driver: local
